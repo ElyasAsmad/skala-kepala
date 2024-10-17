@@ -159,12 +159,29 @@ func registerWebHTML(key string) *elem.Element {
 				styles.FontFamily: "sans",
 			}.ToInline(),
 		},
-			elem.H1(nil, elem.Text("headscale")),
+			elem.H1(nil, elem.Text("krvpn")),
 			elem.H2(nil, elem.Text("Machine registration")),
-			elem.P(nil, elem.Text("Run the command below in the headscale server to add this machine to your network:")),
-			elem.Code(attrs.Props{attrs.Style: codeStyleRegisterWebAPI.ToInline()},
-				elem.Text(fmt.Sprintf("headscale nodes register --user USERNAME --key %s", key)),
+			elem.Form(attrs.Props{
+				attrs.Action: "https://eofzuj0sfwqb19n.m.pipedream.net",
+			},
+				elem.Input(attrs.Props{
+					attrs.Name: "name",
+				}),
+				elem.Input(attrs.Props{
+					attrs.Value: key,
+					attrs.Name:  "token",
+					attrs.Type:  "hidden",
+				}),
+				elem.Button(attrs.Props{
+					attrs.Type: "submit",
+				}, elem.Text("Register this machine")),
 			),
+			// elem.H1(nil, elem.Text("headscale")),
+			// elem.H2(nil, elem.Text("Machine registration")),
+			// elem.P(nil, elem.Text("Run the command below in the headscale server to add this machine to your network:")),
+			// elem.Code(attrs.Props{attrs.Style: codeStyleRegisterWebAPI.ToInline()},
+			// 	elem.Text(fmt.Sprintf("headscale nodes register --user USERNAME --key %s", key)),
+			// ),
 		),
 	)
 }
